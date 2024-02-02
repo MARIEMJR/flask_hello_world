@@ -7,6 +7,9 @@ import sqlite3
 app = Flask(__name__)                                                                                                                  
                                                                                                                                        
 @app.route('/')
+
+def mongraphique():
+    return render_template("graphique.html")
 def monfr():
     return "<h2>Bonjour tout le monde !</h2>"
 def hello_world():
