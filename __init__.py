@@ -7,7 +7,7 @@ import sqlite3
 app = Flask(__name__)                                                                                                                  
                                                                                                                                        
 @app.route('/')
-
+@app.route("/rapport/")
 def mongraphique():
     return render_template("graphique.html")
 def monfr():
