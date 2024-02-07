@@ -64,11 +64,10 @@ def afficher_formulaire():
     return render_template('ajouter_client.html')
 
 # Route pour gérer la soumission du formulaire et enregistrer le nouveau client
-@app.route('/ajouter_client', methods=['POST'])
-def afficher_formulaire():
-    return render_template('ajouter_client.html')
+
 @app.route('/ajouter_client', methods=['POST'])
 def ajouter_client():
+  if request.method == 'POST':
     nom = request.form['nom']
     email = request.form['email']
     telephone = request.form['telephone']
@@ -85,6 +84,7 @@ def ajouter_client():
      # Validation de la transaction et fermeture de la connexion
      conn.commit()
     conn.close()
+    
         
     
      
