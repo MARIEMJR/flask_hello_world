@@ -59,13 +59,35 @@ def chercher_fiche_client(nom_client):
     # Rendre le template HTML et transmettre les données
   return render_template('read_data.html', data=data)
 
-@app.route(' /ajouter_client/')
+@app.route('/ajouter_client', methods=['GET'])
+def afficher_formulaire():
+    return render_template('ajouter_client.html')
+
+# Route pour gérer la soumission du formulaire et enregistrer le nouveau client
+@app.route('/ajouter_client', methods=['POST'])
+def afficher_formulaire():
+    return render_template('ajouter_client.html')
+@app.route('/ajouter_client', methods=['POST'])
 def ajouter_client():
-  conn = sqlite3.connect('database.db')
-  cursor = conn.cursor()
-  nom = request.form['nom']
-  prenom = request.form['prenom']
-  adresse = request.form['adresse']
+    nom = request.form['nom']
+    email = request.form['email']
+    telephone = request.form['telephone']
+    adresse = request.form['adresse']
+    
+     # Connexion à la base de données SQLite
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+        
+    # Exécution de la requête d'insertion
+    cursor.execute('INSERT INTO clients (nom, email, telephone, adresse) VALUES (?, ?, ?, ?)',
+                       (nom, email, telephone, adresse))
+        
+     # Validation de la transaction et fermeture de la connexion
+     conn.commit()
+    conn.close()
+        
+    
+     
   
                                                                                                                                        
 if __name__ == "__main__":
