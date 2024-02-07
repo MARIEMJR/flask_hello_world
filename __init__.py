@@ -58,8 +58,14 @@ def chercher_fiche_client(nom_client):
     
     # Rendre le template HTML et transmettre les données
   return render_template('read_data.html', data=data)
-  
-  
+
+@app.route(' /ajouter_client/')
+def ajouter_client():
+  conn = sqlite3.connect('database.db')
+  cursor = conn.cursor()
+  nom = request.form['nom']
+  prenom = request.form['prenom']
+  adresse = request.form['adresse']
   
                                                                                                                                        
 if __name__ == "__main__":
