@@ -48,7 +48,7 @@ def Readfiche(post_id):
     return render_template('read_data.html', data=data)
 
 
-  @app.route('/nom_client/<string:post_nom')
+  @app.route('/nom_client/<string:post_nom>')
 def NomClient(post_nom):
   conn = sqlite3.connect('database.db')
   cursor = conn.cursor()
