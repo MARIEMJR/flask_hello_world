@@ -82,10 +82,15 @@ def ajouter_client():
                        (nom, email, telephone, adresse))
         
      # Validation de la transaction et fermeture de la connexion
-  conn.commit()
-  conn.close()
+    conn.commit()
+    conn.close()
     
-        
+    # Rediriger vers la page de consultation des clients après l'ajout
+        return redirect(url_for('ReadBDD'))
+
+    # Si la méthode est GET, simplement rendre le template du formulaire
+    return render_template('ajouter_client.html')
+    
     
      
   
