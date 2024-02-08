@@ -82,8 +82,8 @@ def ajouter_client():
                        (nom, email, telephone, adresse))
         
      # Validation de la transaction et fermeture de la connexion
-     conn.commit()
-    conn.close()
+  conn.commit()
+  conn.close()
     
         
     
