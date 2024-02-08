@@ -65,27 +65,22 @@ def afficher_formulaire():
 
 # Route pour gérer la soumission du formulaire et enregistrer le nouveau client
 
-@app.route('/ajouter_client', methods=['POST'])
+@app.route('/ajouter_client/', methods=['GET', 'POST'])
 def ajouter_client():
-  if request.method == 'POST':
-    nom = request.form['nom']
-    email = request.form['email']
-    telephone = request.form['telephone']
-    adresse = request.form['adresse']
-    
-     # Connexion à la base de données SQLite
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-        
-    # Exécution de la requête d'insertion
-    cursor.execute('INSERT INTO clients (nom, email, telephone, adresse) VALUES (?, ?, ?, ?)',
-                       (nom, email, telephone, adresse))
-        
-     # Validation de la transaction et fermeture de la connexion
-    conn.commit()
-    conn.close()
-    
-    # Rediriger vers la page de consultation des clients après l'ajout
+    if request.method == 'POST':
+        # Récupérer les données du formulaire
+        nom = request.form['nom']
+        prenom = request.form['prenom']
+        adresse = request.form['adresse']
+
+        # Insérer les données dans la base de données (ici, je suppose que tu as une table 'clients')
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)', (nom, prenom, adresse))
+        conn.commit()
+        conn.close()
+
+        # Rediriger vers la page de consultation des clients après l'ajout
         return redirect(url_for('ReadBDD'))
 
     # Si la méthode est GET, simplement rendre le template du formulaire
