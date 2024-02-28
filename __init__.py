@@ -34,6 +34,19 @@ def ReadBDD():
     conn.close()
 
     return render_template('read_data.html', data=data)
+@app.route('/véhicule')
+def afficher_vehicule():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM vehicule;')
+
+    data = cursor.fetchall()
+
+    conn.close()
+
+    return render_template('read_vehicule.html', data=data)
+    
+    
 
 @app.route('/c_ajouter_client', methods=['GET', 'POST'])
 def ajouter_client():
@@ -72,8 +85,7 @@ def chercher_client():
         # Récupérer les données du formulaire                                        
                                                                                      
         nom = request.form['nom']                                                    
-                                                                                     
-                                                                                     
+                                                                                                                                           
         # ici, je suppose que tu as une table 'clients'                              
                                                                                      
         conn = sqlite3.connect('database.db')                                        
