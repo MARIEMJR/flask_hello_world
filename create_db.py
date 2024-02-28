@@ -1,21 +1,30 @@
 import sqlite3
+from pathlib import Path
 
-connection = sqlite3.connect('database.db')
+def create_db():
+    db_path = Path("database.db")
+    schema_path = Path("schema.sql")
 
-with open('schema.sql') as f:
-    connection.executescript(f.read())
+    # Vérifier si la base de données existe déjà
+    if db_path.exists():
+        print("La base de données existe déjà.")
+        return
 
-cur = connection.cursor()
+    # Lire le schéma SQL depuis le fichier
+    with schema_path.open(mode="r") as schema_file:
+        schema = schema_file.read()
 
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('DUPONT', 'Emilie', '123, Rue des Lilas, 75001 Paris'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('LEROUX', 'Lucas', '456, Avenue du Soleil, 31000 Toulouse'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('MARTIN', 'Amandine', '789, Rue des Érables, 69002 Lyon'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('TRAMBLEY', 'Antoine', '1010, Boulevard de la Mer, 13008 Marseille'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('LAMBERT', 'Sarah', '222, Avenue de la Liberté, 59000 Lille'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('GAGON', 'Nicolas', '456, Boulevard des Cerisiers, 69003 Lyon'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('DUBOIS', 'Charlotte', '2789, Rue des Roses, 13005 Marseille'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('LEFEVRE', 'Thomas', '333, Rue de la Paix, 75002 Paris'))
+    # Se connecter à la base de données et exécuter le schéma
+    try:
+        conn = sqlite3.connect(str(db_path))  # Utiliser str(db_path) pour obtenir la chaîne du chemin d'accès
+        cursor = conn.cursor()
+        cursor.executescript(schema)
+        conn.commit()
+        print("Base de données créée avec succès.")
+    except sqlite3.Error as e:
+        print(f"Erreur lors de la création de la base de données : {e}")
+    finally:
+        conn.close()
 
-
-connection.commit()
-connection.close()
+if __name__ == "__main__":
+    create_db() 
