@@ -35,7 +35,7 @@ def ReadBDD():
 
     return render_template('read_data.html', data=data)
 
-@app.route('/c_ajouter_client/', methods=['GET', 'POST'])
+@app.route('/c_ajouter_client', methods=['GET', 'POST'])
 def ajouter_client():
     if request.method == 'POST':
         # Récupérer les données du formulaire
