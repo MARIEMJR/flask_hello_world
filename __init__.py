@@ -82,7 +82,7 @@ def chercher_client():
                                                                                      
         if conn is not None:                                                         
                                                                                      
-            cursor.execute('SELECT * FROM clients WHERE nom LIKE ?', ('%' + nom + '%',))                                                                                  
+            cursor.execute('SELECT * FROM client WHERE nom LIKE ?', ('%' + nom + '%',))                                                                                  
                                                                                      
             data = cursor.fetchall()                                                 
                                                                                      
