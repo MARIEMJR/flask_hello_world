@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ajouter Client</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      /* Ajout de style pour le bouton */
+      input[type="submit"] {
+        background-color: green; /* Couleur verte */
+        color: white; /* Texte en blanc */
+        padding: 10px 20px; /* Marge intérieure pour le bouton */
+        border: none; /* Suppression de la bordure */
+        cursor: pointer; /* Curseur pointer au survol */
+      }
+    </style>
+  </head> 
+  <body>
+    <h1>Ajouter Client</h1>
+    <form action="/ajouter_client/" method="post">
+      <label for="nom">Nom :</label><br>
+      <input type="text" id="nom" name="nom"><br><br> <!-- Ajout d'espaces -->
+
+      <label for="prenom">Prenom :</label><br>
+      <input type="text" id="prenom" name="prenom"><br><br> <!-- Ajout d'espaces -->
+
+      <label for="email">Email :</label><br>
+      <input type="text" id="email" name="email"><br><br> <!-- Ajout d'espaces -->
+
+      <label for="adresse">Address :</label><br>
+      <input type="text" id="adresse" name="adresse"><br><br> <!-- Ajout d'espaces -->
+
+      <label for="phone">Phone :</label><br>    
+      <input type="text" id="phone" name="phone"><br><br> <!-- Ajout d'espaces -->
+
+      <input type="submit" value="Ajouter">
+    </form>
+  </body>
+</html>
