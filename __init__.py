@@ -34,16 +34,14 @@ def ReadBDD():
     conn.close()
 
     return render_template('read_data.html', data=data)
+    
 @app.route('/véhicule')
 def afficher_vehicule():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM vehicule;')
-
     data = cursor.fetchall()
-
     conn.close()
-
     return render_template('read_vehicule.html', data=data)
     
     
@@ -94,7 +92,7 @@ def chercher_client():
                                                                                      
         if conn is not None:                                                         
                                                                                      
-            cursor.execute('SELECT * FROM client WHERE nomclient LIKE ?', ('%' + nom + '%',))                                                                                  
+            cursor.execute('SELECT * FROM client WHERE nomclient LIKE ?', ('%' + nomclient + '%',))                                                                                  
                                                                                      
             data = cursor.fetchall()                                                 
                                                                                      
